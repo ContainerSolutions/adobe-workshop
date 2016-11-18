@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deals
+  labels:
+    name: deals
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: deals
+    spec:
+      containers:
+      - name: deals
+        image: workshop/deals:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deals
+  labels:
+    name: deals
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 80
+    targetPort: 8080
+  selector:
+    name: deals
