@@ -36,14 +36,10 @@ Microservices reference application.
 
 ```bash
 git clone https://github.com/microservices-demo/microservices-demo.git
-cd microservices-demo/deploy/docker-only
-export MYSQL_ROOT_PASSWORD=pw #windows -> 'set MYSQL_ROOT_PASSWORD pw'
+cd microservices-demo/deploy/docker-compose
 docker-compose up -d
 ```
 
 ---
 
-## Review
-
-  * Questions?
-  * [On to Containers...](../containers/runsheet.md)
+  * [On to Microservices...](../microservices/runsheet.md)

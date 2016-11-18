@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deals-db
+  labels:
+    name: deals-db
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: deals-db
+    spec:
+      containers:
+      - name: deals-db
+        image: mongo
+        ports:
+        - name: mongo
+          containerPort: 27017

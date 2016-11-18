@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  deals:
+    build: .
+    ports:
+      - 8080:8080
+    hostname: deals
+  deals-db:
+    image: mongo:3.0
+    hostname: deals-db
