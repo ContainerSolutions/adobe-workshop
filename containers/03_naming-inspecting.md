@@ -106,3 +106,7 @@ docker inspect --format '{{ json .Created }}' ubuntu_c
 * Then each field or member can be accessed in dotted notation syntax.
 * The optional json keyword asks for valid JSON output.  
 (e.g. here it adds the surrounding double-quotes.)
+
+----
+
+  * [Next up, Volumes...](./04_volumes.md)

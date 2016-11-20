@@ -12,10 +12,8 @@ At the end of this session, you'll have:
     Receives and processes incoming Docker API requests
     * The **Docker client**
     Talks to the Docker daemon via the Docker API  
-    We'll use mostly the CLI embedded within the docker binary
     * **Docker Hub** Registry  
     Collection of public images  
-	The Docker daemon talks to it via the registry API
 
 ----
 
@@ -28,16 +26,9 @@ it will echo "hello world" to the default stdout
 
 ----
 
-### Thanks for you attention, this are containers
-![Dr. Evil](Drevil_million_dollars.jpg)
-
-For more informations, please consult Container Solution or insert another coin
-
-----
-
 ## Our first container!
 
-* We used one of the smallest, simplest images available: busybox.
+* We used one of the smallest images available: busybox.
 * We ran a single process and echo'ed hello world.
 
 Though, it's not a very useful container 
@@ -183,7 +174,8 @@ To see only the ID of the last started container:
 docker ps -ql
 ```
 
-This is helpful for scripting or doing a lot of experimentation where you start and delete quite a lot of times a container. As an example `docker rm -f $(docker ps -ql)`, which will delete the last started container.
+This is helpful for scripting.
+E.G `docker rm -f $(docker ps -ql)`
 
 ----
 
@@ -197,10 +189,8 @@ or
 ```
 docker logs $(docker ps -ql)
 ```
-We specified a prefix of the full container ID.
-* You can, of course, specify the full ID.
-* The logs command will output the entire logs of the container.
-(Sometimes, that will be too much. Let's see how to address that.)
+We specified a prefix of the full container ID
+* The `logs` command outputs all logs by default
 
 ```bash
 docker logs --tail 3 <CONTAINER ID>
@@ -214,20 +204,17 @@ Just like with the standard UNIX command `tail -f`, we can follow the logs of ou
 docker logs --tail 1 --follow <CONTAINER ID>
 ```
 It will display the last line in the log file.
-* Then, it will continue to display the logs in real time.
 * Use ^C to exit.
 
 ----
 
 ### Stop our container
 
-There are two ways we can terminate our detached container.
-* Killing it using the `docker kill` command.
+There are two ways we can terminate our detached container
+* The `docker kill` command.
     * kill stops the container immediately, by using the KILL signal.
-* Stopping it using the `docker stop` command.
-    * stop sends a TERM signal, and after 10 seconds, if the container has not stopped, it sends KILL.
-
-Reminder: the KILL signal cannot be intercepted, and will forcibly terminate the container.
+* The `docker stop` command.
+    * stop sends a TERM signal, and after 10 seconds it sends KILL.
 
 ----
 
@@ -313,3 +300,5 @@ The container will be restarted using the same options you launched it with.
 You can re-attach to it if you want to interact with it
 
 ----
+
+  * [Next up, Images...](./02_images.md)

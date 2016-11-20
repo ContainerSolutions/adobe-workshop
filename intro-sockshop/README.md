@@ -15,20 +15,22 @@ Microservices reference application.
 
 ---
 
-## Goals
+## The Cloud Native Reference App
 
   * Build the "Pet Shop" for Microservices
-  * Help define what a 'Cloud Native' app is
   * Show best practices
   * Explore different technologies
+  * Moved into it's own GitHub Org
+  * Deployable across variety of schedulers/platforms
 
 ---
 
-## Current State
+## Connect to Cloud VMs
 
-  * Moved into it's own GitHub Org
-  * Gaining community traction
-  * Deployable across variety of schedulers/platforms
+```bash
+ssh csuser@[IP]
+sudo /usr/share/google/run-startup-scripts
+```
 
 ---
 

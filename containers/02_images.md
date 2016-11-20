@@ -125,15 +125,10 @@ The image name is:
 ### List images on your host
 
 ```bash
-docker images
+$docker images
 REPOSITORY                                  TAG                                 IMAGE ID            CREATED             SIZE
 muellermich/reveal-md                       latest                              92670cf55bca        3 days ago          689.3 MB
 reveal-md                                   latest                              92670cf55bca        3 days ago          689.3 MB
-muellermich/reveal-md                       <none>                              bffc6af76db3        3 days ago          711.8 MB
-muellermich/reveal-md                       <none>                              f4767cdedb2b        3 days ago          689.5 MB
-muellermich/reveal-md                       <none>                              9a4005187039        3 days ago          689.6 MB
-muellermich/reveal-md                       <none>                              0f63ac533bf2        3 days ago          689.5 MB
-muellermich/reveal-md                       <none>                              e6a7dfbfd82a        3 days ago          689.4 MB
 <none>                                      <none>                              04ead644d638        3 days ago          689.5 MB
 <none>                                      <none>                              50af7f43d702        3 days ago          689.5 MB
 <none>                                      <none>                              622748c50d8f        3 days ago          673.8 MB
@@ -209,6 +204,7 @@ Don't specify tags:
 * When doing rapid testing and prototyping.
 * When experimenting.
 * When you want the latest version.
+
 Do specify tags:
 * When recording a procedure into a script.
 * When going to production.
@@ -231,15 +227,6 @@ We will:
 * Create a container from a base image.
 * Install software manually in the container, and turn it into a new image.
 * Learn about new commands: `docker commit`, `docker tag`, and `docker diff`.
-
-----
-
-### Building images interactively
-As we have seen, the images on the Docker Hub are sometimes very basic.  
-How do we want to construct our own images?  
-As an example, we will build an image that has figlet.  
-First, we will do it manually with docker commit.  
-Then, in an upcoming chapter, we will use a Dockerfile and docker build.
 
 ----
 
@@ -864,11 +851,4 @@ We've learned how to:
 
 ----
 
-## Setting up a private registry
-
-In this lesson, I’ll explain:
-* How to setup a private registry.
-* Ways to secure it.
-
-----
-
+  * [Next up, Naming...](./03_naming-inspecting.md)
