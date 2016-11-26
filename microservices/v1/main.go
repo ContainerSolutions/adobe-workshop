@@ -19,7 +19,7 @@ func main() {
 
 	http.HandleFunc("/deals", dealsHandler)
 
-	http.ListenAndServe(":80", nil)
+	http.ListenAndServe(":8080", nil)
 }
 
 // Handle deal requests

@@ -2,36 +2,27 @@
 
 ----
 
+Fetch the Repo
+
+```
+$ git clone https://github.com/ContainerSol/yow-workshop
+```
+
+----
+
 ## Building a new Microservice (v1)
 
 Check initial code
 
-`open v1/main.go`
+`open ./microservices/v1/main.go`
 
 ----
 
-Add Dockerfile
-
-```
-FROM golang:1.6
-
-COPY . /go/src/github.com/z2h-zurich/deals
-
-RUN go install github.com/microservices-workshop/deals
-
-ENTRYPOINT /go/bin/deals
-
-EXPOSE 8080
-```
-
-----
-
-## Build and Run Docker image
+## Build and run service
 
 ```bash
-cd v1/
-docker build -t z2h-zurich/deals:v1 .
-docker run -d --publish 8080:8080 z2h-zurich/deals:v1
+$ go build .
+$ go run main.go &
 ```
 
 ----
@@ -39,17 +30,12 @@ docker run -d --publish 8080:8080 z2h-zurich/deals:v1
 ## Call service
 
 ```bash
-curl localhost:8080/deals?id=1
+$ curl localhost:8080/deals?id=1
 ```
 
 ----
 
-## Stop and remove container
-
-```bash
-docker stop $(docker ps -ql)
-docker rm $(docker ps -ql
-```
+...
 
 ----
 
@@ -62,11 +48,11 @@ docker rm $(docker ps -ql
 ## Build and Run
 
 ```bash
-cd v2/
-docker build -t z2h-zurich/deals:v2 .
-docker network create my_network
-docker run --name deals-db -d --network my_network mongo
-docker run -d -p 8080:8080 --network my_network z2h-zurich/deals:v2
+$ cd v2/
+$ docker build -t z2h-zurich/deals:v2 .
+$ docker network create my_network
+$ docker run --name deals-db -d --network my_network mongo
+$ docker run -d -p 8080:8080 --network my_network z2h-zurich/deals:v2
 ```
 
 ----
@@ -74,8 +60,8 @@ docker run -d -p 8080:8080 --network my_network z2h-zurich/deals:v2
 ## Clean up
 
 ```bash
-docker stop $(docker ps -ql)
-docker rm $(docker ps -ql
+$ docker stop $(docker ps -ql)
+$ docker rm $(docker ps -ql
 ```
 
 ----

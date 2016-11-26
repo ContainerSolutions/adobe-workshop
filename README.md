@@ -22,13 +22,13 @@ Building microservices is hard enough, but on top of that you have to choose a n
 
   * Put microservice in container
 
-#### [Intro to Orchestrators (Kubernetes)](schedulers/01_outline.md)
-
-  * Deploy on orchestrator (k8s or minikube)
-
 #### [Intro to container networking (Weavenet)](networking/01_networking.md)
 
   * Add a DB container, deploy and connect
+  
+#### [Intro to Orchestrators (Kubernetes)](schedulers/01_outline.md)
+
+  * Deploy on orchestrator (k8s or minikube)
 
 #### [Visualization and debugging (Weave Scope)](visualisation/runsheet.md)
 

@@ -1,3 +1,12 @@
+## Exercise
+
+- Write a Dockerfile
+- Build image
+- Run container
+- Make API call to serivce
+
+----
+
 ## Write a Dockerfile
 
 ```
@@ -65,6 +74,12 @@ docker run -d -p 8080:8080 --network my_network yow-workshop/deals:v2
 docker stop $(docker ps -ql)
 docker rm $(docker ps -ql
 ```
+
+----
+
+## V2 of service, with Database
+
+./microservices/v2/
 
 ----
 
