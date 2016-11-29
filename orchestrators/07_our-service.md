@@ -211,4 +211,4 @@ Apply changes and watch pods...
 
 ## Launch Sock Shop
 
-`kubectl apply -f complete-demo.yaml`
+`kubectl apply -f complete-demo.yaml --validate=false`
