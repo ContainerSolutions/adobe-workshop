@@ -206,3 +206,9 @@ Apply changes and watch pods...
 `kubectl rollout undo deployment/deals`
 `kubectl rollout status deployment/deals`
 `kubectl get pods`
+
+----
+
+## Launch Sock Shop
+
+`kubectl apply -f complete-demo.yaml`
