@@ -117,32 +117,6 @@ services:
 
 ----
 
-## A real microservice (v3)
-
-`open v3/`
-
-----
-
-## Build new image
-
-`cd v3/`
-`docker build -t yow-workshop/deals:v3 .`
-
-----
-
-## Logging and Monitoring
-
-`open v4/`
-
-----
-
-## Build new version
-
-`cd v4/`
-`docker build -t yow-workshop/deals:v4 .`
-
-----
-
 ## Review
 
 * Questions?
