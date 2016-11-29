@@ -1,6 +1,6 @@
 # Microservices Tooling
 
----
+----
 
 ## Install Weave Scope
 
@@ -10,26 +10,18 @@ sudo chmod a+x /usr/local/bin/scope
 sudo scope launch
 ```
 
----
+----
 
-## Launch container with Weave plugin
+## Open Scope UI
 
-```bash
-eval $(weave env)
-docker run -d --publish 8080:8080 --name deals-dev microservices-demo/deals
-```
+`http://[Cloud VM IP]:4040/`
 
----
+----
 
-## Open in browser
+## Try it out!
 
-`localhost:4040` 
-or
-`{docker-machine ip}:4040`
+- View metrics
+- Kill container (watch results)
+- Connect to container
 
----
 
-## Review
-
-* Questions?
-* Thanks for coming!
