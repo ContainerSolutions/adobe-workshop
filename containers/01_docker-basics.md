@@ -224,7 +224,7 @@ There are two ways we can terminate our detached container
 docker kill <CONTAINER ID>
 ```
 
-All containers should be stopped now:
+The container should be stopped now:
 
 Verify using `docker ps`
 

@@ -47,12 +47,6 @@ If an image is read-only, how do we change it?
 
 ----
 
-Confusion (chicken-and-egg):
-* The only way to create an image is by "freezing" a container.
-* The only way to create a container is by instanciating an image.
-
-----
-
 ### Creating the 1st images
 
 There is a special empty image called scratch.
@@ -100,11 +94,11 @@ Those images include:
 ### User namespaces
 The user namespace holds images for Docker Hub users and organizations.
 For example:
-* muellermich/nodejs-hello
+* jpetazzo/clock
 The Docker Hub user is:
-* muellermich
+* jpetazzo
 The image name is:
-* nodejs-hello
+* clock
 
 ----
 
@@ -125,16 +119,24 @@ The image name is:
 ### List images on your host
 
 ```bash
-$docker images
-REPOSITORY                                  TAG                                 IMAGE ID            CREATED             SIZE
-muellermich/reveal-md                       latest                              92670cf55bca        3 days ago          689.3 MB
-reveal-md                                   latest                              92670cf55bca        3 days ago          689.3 MB
-<none>                                      <none>                              04ead644d638        3 days ago          689.5 MB
-<none>                                      <none>                              50af7f43d702        3 days ago          689.5 MB
-<none>                                      <none>                              622748c50d8f        3 days ago          673.8 MB
-muellermich/reveal-md                       <none>                              57bec2477c00        3 days ago          689.5 MB
-<none>                                      <none>                              303087ff0bab        3 days ago          689.5 MB
-<none>                                      <none>                              10cecf3ef742        3 days ago          689.4 MB
+$ docker images
+REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
+swaggerapi/swagger-generator   latest              c52ff1076727        2 hours ago         688 MB
+weaveworksdemos/load-test      latest              23fe0b6d473b        7 days ago          561 MB
+weaveworksdemos/front-end      yow                 277ae5fdebfb        10 days ago         98.84 MB
+ubuntu                         latest              e4415b714b62        12 days ago         128.1 MB
+weaveworksdemos/shipping       latest              89340473bb7e        2 weeks ago         184.8 MB
+weaveworksdemos/payment        latest              0ed544706c07        2 weeks ago         26.31 MB
+weaveworksdemos/orders         latest              13dceff12d00        2 weeks ago         183.5 MB
+weaveworksdemos/cart           latest              0757ce2e55bc        2 weeks ago         183.5 MB
+weaveworksdemos/user           latest              5c038aae7cf7        2 weeks ago         30.92 MB
+weaveworksdemos/user-db        latest              98c5bca76698        2 weeks ago         657.3 MB
+weaveworksdemos/catalogue-db   latest              cdd57d9d3599        2 weeks ago         383.4 MB
+weaveworksdemos/catalogue      latest              2ebfed846b6f        2 weeks ago         35.35 MB
+busybox                        latest              e02e811dd08f        7 weeks ago         1.093 MB
+muellermich/reveal-md          latest              48338df2517f        3 months ago        692.8 MB
+weaveworksdemos/edge-router    latest              e45b736cf92f        3 months ago        60.65 MB
+jpetazzo/clock                 latest              12068b93616f        21 months ago       2.433 MB
 ```
 
 ----
@@ -827,8 +829,8 @@ It is similar but can automatically extract archives.
 
 ### Uploading our images to the Docker Hub
 We have built our first images.
-If we were so inclined, we could share those images through the Docker Hub.
-We won't do it since we don't want to force everyone to create a Docker Hub account (although it's free, yay!) but the steps would be:
+We could share those images through the Docker Hub. (requires Docker Hub account)
+But the steps would be:
 * have an account on the Docker Hub
 * tag our image accordingly (i.e. username/imagename)
 * docker push username/imagename

@@ -7,7 +7,9 @@
 
 ----
 
-## Write a Dockerfile
+## Write a Dockerfile 
+
+(example)
 
 ```
 FROM golang:1.6
@@ -26,7 +28,7 @@ EXPOSE 8080
 ## Build and Run Docker image
 
 ```bash
-cd v1/
+cd microserivces/v1/
 docker build -t yow-workshop/deals:v1 .
 docker run -d --publish 8080:8080 yow-workshop/deals:v1
 ```

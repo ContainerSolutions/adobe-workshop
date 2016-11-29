@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: deals
-        image: z2h-zurich/deal:v3
+        image: yow-workshop/deal:v3
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
