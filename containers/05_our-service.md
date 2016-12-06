@@ -120,4 +120,4 @@ services:
 ## Review
 
 * Questions?
-* [On to orchestrators...](../orchestrators/01_outline.md)
+* Stop and remove *this* container

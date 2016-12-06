@@ -165,66 +165,19 @@ docker volume inspect test1
 
 ----
 
-### Do it yourself #2
-
-* Run `docker volume inspect` on the test1 volume
-```
-docker volume inspect test1
-```
-* Copy the path specified by the Mountpoint field. The path should be 
-```
-/var/lib/docker/volumes/test1/_data
-```
-* Elevate your user privileges to root
-```
-sudo su
-```
-* Change directory into the volume path in step 2 (will only work in Linux)
-```
-cd /var/lib/docker/volumes/test1/_data
-```
-
-----
-
-* Run `ls` and verify you can see the `test.txt` file
-
-* Create another file called test2.text
-```
-touch test2.txt
-```
-* Exit the superuser account
-```
-exit
-```
-* Use docker exec to log back into the shell of your Ubuntu container that is still running
-```
-docker exec -it <container name> bash
-```
-or
-```
-docker attach <container name>
-```
-
-----
-
-* Change directory into the /www/website folder 
-Verify that you can see both the test.txt and test2.txt files
-
-----
-
 ### Deleting a volume
 
 * Volumes are not deleted when you delete a container
-* Use the `docker volume rm` command to delete a volume
-* Can also use the `-v` option in the `docker rm` command to delete all the volumes associated with the container when deleting the container itself
+* Use `docker volume rm` to delete a volume
 
 Delete the volume called test1
 ```
 docker volume rm test1
 ```
-Delete a container and remove it's associated volumes
+First remove the container, then try again
 ```
-docker rm -v <container ID>
+docker rm -f <container ID>
+docker volume rm test1
 ```
 
 ----
@@ -234,11 +187,10 @@ docker rm -v <container ID>
 * You cannot delete a volume if it is being used by a container
     * Doesn’t matter if the container is running or stopped
 * Must delete all containers first
-* `docker rm -v` command will not delete a volume associated with the container if that volume is mounted in another container 
 
 ----
 
-### Do it yourself #3
+### Do it yourself (homework)
 
 * Delete the container from exercise #1 without using any options 
 ```
@@ -291,37 +243,17 @@ docker run -v [host path]:[container path]:[rw|ro]
 
 Mount the contents of the public_html folder on the hosts to the container volume at /data/www
 ```
-docker run –d -v /some/html/files:/data/www ubuntu
+docker run -d -v /some/html/files:/data/www ubuntu
 ```
 
 ----
 
-### Inspecting the mapped volume
-
-The Mounts field from docker inspect will show the container volume being mapped to the host path specified during docker run
-
-```
-"Mounts": [
-            {
-                "Name": "test1",
-                "Source": "/var/lib/docker/volumes/test1/_data",
-                "Destination": "/www/website",
-                "Driver": "local",
-                "Mode": "z",
-                "RW": true,
-                "Propagation": "rprivate"
-            }
-        ],
-```
-
-----
-
-### Do it yourself #4
+### Do it yourself
 
 * In your home directory, create a public_html folder and create an index.html file inside this folder
 * Run an Ubuntu container and mount the public_html folder to the volume /data/www
 ```
-docker run -it -v /home/<user>/public_html:/data/www ubuntu
+docker run -it -v /home/csuser/public_html:/data/www ubuntu
 ```
 * In the container, look inside the /data/www folder and verify you can see the index.html file
 * Exit the container without stopping it
@@ -360,19 +292,16 @@ CTRL + P + Q
 
 ### Running the container
 
-* Key aspects to remember when running the container
-    * Use -d to run it in detached mode
-    * Use -P to automatically map the container ports
 * When we visit our server URL we should now see our index.html file inside our public_html folder instead of the default NGINX welcome page
 
-Run an nginx container and map the our public_html folder to the volume at the /usr/share/nginx/html folder in the container. <path> is the path to public_html
+Run an nginx container and map the our public_html folder to the volume at the /usr/share/nginx/html folder in the container.
 ```
-docker run -d –P –v <path>:/usr/share/nginx/html nginx
+docker run -d -p 8001:80 -v /home/csuser/public_html:/usr/share/nginx/html nginx
 ```
 
 ----
 
-### Do it yourselfe #5
+### Do it yourself (homework)
 
 * Create a volume called nginx_logs
 * docker volume create --name nginx_logs
@@ -402,7 +331,7 @@ docker exec -it nginx_server bash
 ### Use cases for mounting host directories
 
 You want to manage storage and snapshots yourself.
-* With LVM, or a SAN, or ZFS, or anything else!)
+* With LVM, or a SAN, or ZFS, or?
 * You have a separate disk with better performance (SSD) or resiliency (EBS) than the system disk, and you want to put important data on that disk.
 * You want to share your source directory between your host (where the source gets edited) and the container (where it is compiled or executed).
     * Good for testing purposes but not for production deployment
@@ -426,6 +355,7 @@ Note: Be aware of potential conflicts if multiple applications are allowed write
 * Can specify arguments in a JSON array or string
 * Cannot map volumes to host directories
 * Volumes are initialized when the container is executed
+
 ```
 String example
 VOLUME /myvol
@@ -443,6 +373,7 @@ VOLUME [“myvol”, “myvol2”]
 
 * When we run a container from this image, the volume will be initialized along with any data in the specified location
 * If we want to setup default files in the volume folder, the folder and file must be created first
+
 ```
 FROM ubuntu
 
@@ -451,6 +382,70 @@ RUN apt-get update && apt-get install -y vim wget
 RUN mkdir /data/myvol -p && echo "hello world" > /data/myvol/testfile
 VOLUME ["/data/myvol"]
 ```
+
+----
+
+### Module summary
+
+* Volumes are created with the docker volume create command
+* Volumes can be mounted when we run a container during the docker run command or in a Dockerfile
+* Volumes bypass the copy on write system
+* We can map a host directory to a volume in a container
+* A volume persists even after its container has been deleted
+
+----
+
+  * [Next up, Containerize our service](./05_our-service.md)
+
+  * or continue with more exercises...
+
+----
+
+
+### Do it yourself (Homework)
+
+* Run `docker volume inspect` on the test1 volume
+```
+docker volume inspect test1
+```
+* Copy the path specified by the Mountpoint field. The path should be 
+```
+/var/lib/docker/volumes/test1/_data
+```
+* Elevate your user privileges to root
+```
+sudo su
+```
+* Change directory into the volume path in step 2 (will only work in Linux)
+```
+cd /var/lib/docker/volumes/test1/_data
+```
+
+----
+
+* Run `ls` and verify you can see the `test.txt` file
+
+* Create another file called test2.text
+```
+touch test2.txt
+```
+* Exit the superuser account
+```
+exit
+```
+* Use docker exec to log back into the shell of your Ubuntu container that is still running
+```
+docker exec -it <container name> bash
+```
+or
+```
+docker attach <container name>
+```
+
+----
+
+* Change directory into the /www/website folder 
+Verify that you can see both the test.txt and test2.txt files
 
 ----
 
@@ -483,6 +478,8 @@ docker run --name mydata -v /data/app1 busybox true
 * Reference your data container by its container name. For example: 
     * `--volumes-from datacontainer …`
 
+----
+
 ### Backup your data containers
 
 * It’s a good idea to back up data containers such as our logdata container, which has our NGINX log files
@@ -491,16 +488,3 @@ docker run --name mydata -v /data/app1 busybox true
     * Mount a host directory as another volume on the container
     * Run the tar process to backup the data container volume onto your host folder
 
-----
-
-### Module summary
-
-* Volumes are created with the docker volume create command
-* Volumes can be mounted when we run a container during the docker run command or in a Dockerfile
-* Volumes bypass the copy on write system
-* We can map a host directory to a volume in a container
-* A volume persists even after its container has been deleted
-
-----
-
-  * [Next up, Containerize our service](./05_our-service.md)

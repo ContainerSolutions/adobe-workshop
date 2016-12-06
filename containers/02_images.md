@@ -1,5 +1,5 @@
 ## Understanding Docker images
-In this lesson, I’ll explain:
+We will cover:
 * What is an image.
 * What is a layer.
 * The various image namespaces.
@@ -17,32 +17,30 @@ In this lesson, I’ll explain:
 
 ----
 
-### Difference between container and image
+### Container vs. Image
 
 * An image is a read-only filesystem.
 * A container is an encapsulated set of processes running in a read-write copy of that filesystem.
-* To optimize container boot time, copy-on-write is used instead of regular copy.
 * docker run starts a container from a given image.
 
-Images are like templates or stencils that you can create containers from.
+Images are like templates that you can create containers from.
 
 ----
 
-### OOP
+### ...or in object oriented terms:
 
-* Images are conceptually similar to classes.
-* Layers are conceptually similar to inheritance.
-* Containers are conceptually similar to instances.
+* *Images* are similar to `classes`.
+* *Layers* are similar to `inheritance`.
+* *Containers* are similar to `instances`.
 
 ----
 
 ### But…
 
 If an image is read-only, how do we change it?
-* We don't.
 * We create a new container from that image.
 * Then we make changes to that container.
-* When we are satisfied with those changes, we transform them into a new layer.
+* We can then transform them into a new layer.
 * A new image is created by stacking the new layer on top of the old image.
 
 ----
@@ -223,31 +221,30 @@ Do specify tags:
 ----
 
 ## Building images interactively
-In this lesson, we will create our first container image.
-It will be a basic distribution image, but we will pre-install the package figlet.
-We will:
-* Create a container from a base image.
-* Install software manually in the container, and turn it into a new image.
-* Learn about new commands: `docker commit`, `docker tag`, and `docker diff`.
+We will create our first container image, by:
+* Creating a container from a base image.
+* Installing software manually in the container, and turn it into a new image.
+* Learning about new commands: `docker commit`, `docker tag`, and `docker diff`.
 
 ----
 
-### Create a new container and make some changes
+### Create and modify new container
 
 #### Preparation/Do it yourself
-Our base image will be the Ubuntu image  
-Start the Ubuntu container and install figlet  
-Detach from the container
+* Our base image will be the Ubuntu image  
+* Start the Ubuntu container and install figlet  
+* Detach from the container
 
 ----
 
-### Create a new container and make some changes
-* start Ubuntu container
+### Create and modify new container
+
+Start Ubuntu container
 ```bash
 docker run -ti ubuntu
 ```
 Update apt and install figlet
-```bash
+```
 apt-get update && apt-get install -y figlet
 ```
 Detach from the Container
@@ -284,8 +281,8 @@ C /usr/share
 ### Docker tracks filesystem changes
 
 * An image is read-only.
-* When we make changes, they happen in a copy of the image.
-* Docker can show the difference between the image, and its copy.
+* Any changes occur in a copy of the image.
+* `docker diff` shows the differences between the image and its copy.
 * For performance, Docker uses copy-on-write systems.  
 (i.e. starting a container based on a big image doesn't incur a huge copy.)
 
@@ -440,10 +437,16 @@ Successfully built ccd7cf351f38
 
 ----
 
+Try re-running the same build:
+
+```
+docker build -t filget .
+```
+
+----
+
 ### The caching system
 
-If you run the same build again, it will be instantaneous.  
-Why?
 * After each build step, Docker takes a snapshot.
 * Before executing a step, Docker checks if it has already built the same sequence.
 * Docker uses the exact strings defined in your Dockerfile:
@@ -492,7 +495,7 @@ IMAGE               CREATED             CREATED BY                              
 
 ----
 
-### Do it youself
+### Do it youself (homework)
 
 * Create a Dockerfile
     * Install cowsay
@@ -605,12 +608,14 @@ root@ca2a5d0b77c5:/#
 We want to be able to specify a different message on the command line, while retaining figlet and some default parameters.
 In other words, we would like to be able to do this:
 ```bash
-docker run -ti figlet salut
-           _            
-          | |           
- ,   __,  | |       _|_ 
-/ \_/  |  |/  |   |  |  
- \/ \_/|_/|__/ \_/|_/|_/
+docker run -ti figlet g'day!
+       _     _             _
+  __ _( ) __| | __ _ _   _| |
+ / _` |/ / _` |/ _` | | | | |
+| (_| | | (_| | (_| | |_| |_|
+ \__, |  \__,_|\__,_|\__, (_)
+ |___/               |___/
+
 ```
 
 ----
@@ -658,12 +663,14 @@ Successfully built e1003780fba8
 
 Run it
 ```bash
-docker run -ti figlet salut
-           _            
-          | |           
- ,   __,  | |       _|_ 
-/ \_/  |  |/  |   |  |  
- \/ \_/|_/|__/ \_/|_/|_/
+docker run -ti figlet g'day!
+       _     _             _
+  __ _( ) __| | __ _ _   _| |
+ / _` |/ / _` |/ _` | | | | |
+| (_| | | (_| | (_| | |_| |_|
+ \__, |  \__,_|\__,_|\__, (_)
+ |___/               |___/
+
 ```
 
 ----
@@ -705,12 +712,13 @@ docker run -ti figlet
 |   |_/|__/|__/|__/\__/ 
 ```
 ```bash
-docker run -ti figlet salut
-           _            
-          | |           
- ,   __,  | |       _|_ 
-/ \_/  |  |/  |   |  |  
- \/ \_/|_/|__/ \_/|_/|_/
+docker run -ti figlet g'day!
+       _     _             _
+  __ _( ) __| | __ _ _   _| |
+ / _` |/ / _` |/ _` | | | | |
+| (_| | | (_| | (_| | |_| |_|
+ \__, |  \__,_|\__,_|\__, (_)
+ |___/               |___/
 ```
 
 ----
@@ -728,7 +736,7 @@ root@c138bf9ec9ad:/#
 
 ----
 
-### Do it yourself
+### Do it yourself (homework)
 * Create a Dockerfile
     * Base image is ubuntu
     * install cowsay

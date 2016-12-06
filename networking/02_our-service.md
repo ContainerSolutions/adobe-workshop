@@ -12,7 +12,16 @@
 
 ----
 
-## Build and Run
+Our service expects a `deals-db` to connect to.
+
+We want to:
+
+* Create a network for our two containers
+* Run a `mongo` container (hint: container name == hostname)
+
+----
+
+## Possible solution
 
 ```bash
 cd v2/
@@ -21,5 +30,3 @@ docker network create my_network
 docker run --name deals-db -d --network my_network mongo
 docker run -d -p 8080:8080 --network my_network yow-workshop/deals:v2
 ```
-
-----

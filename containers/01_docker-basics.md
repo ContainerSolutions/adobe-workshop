@@ -17,7 +17,7 @@ At the end of this session, you'll have:
 
 ----
 
-### First container (Hello World)
+### First (...or second) container
 ```bash
 docker run busybox echo hello world
 ```
@@ -84,9 +84,6 @@ root@d2fbce5ecbc8:/#
 
 ### What happens when we exit the container?
 
-If you know it, you don't need to do it
-
-If not please do:
 Just exit the shell, like you would usually do (`exit` or `^D`)  
 * Our container is now in a stopped state
 * It still exists on disk, but all compute resources have been freed up
@@ -96,15 +93,14 @@ Just exit the shell, like you would usually do (`exit` or `^D`)
 ### What we just did
 * We started a brand new container
 * The basic Ubuntu image was used, and figlet is not here
-* We saw that changes to a running container are not persistent
+* We saw that changes to a running container are not persistent (to the image)
 
-We will see in the next chapters how to bake a custom image with figlet
+We will see later how to bake a custom image with figlet
 
 ----
 
 ## Background containers
-Our first containers were interactive.  
-We will now see how to:
+We will look at how to:
 * Run a non-interactive container.
 * Run a container in the background.
 * List running containers.
@@ -117,19 +113,15 @@ We will now see how to:
 ### A non-interactive container
 ```bash
 docker run jpetazzo/clock
-Mon Aug 15 13:14:47 UTC 2016
-Mon Aug 15 13:14:48 UTC 2016
-Mon Aug 15 13:14:49 UTC 2016
 ```
 This container will run forever.
 * Docker has automatically downloaded the image jpetazzo/clock.
-* This image is a user image, created by jpetazzo.
-* I’ll tell more about user images (and other types of images) later
+* This is a user image (we will go over images later)
 * To stop it, press ^C.
 
 ----
 
-### Run a container in the background (deamon)
+### Run a container in the background
 
 Containers can be started in the background, with the `-d` flag (daemon mode):
 ```bash
@@ -235,9 +227,8 @@ docker ps -a
 
 ----
 
-## Restarting and attaching to containers
-We have started containers in the foreground, and in the background.
-Now we will see how to:
+## Restarting and attaching
+How can we:
 * Put a container in the background.
 * Attach to a background container to bring it to the foreground.
 * Restart a stopped container
@@ -278,26 +269,23 @@ $ docker attach <containerID>
     * You won't be able to detach with ^P^Q.
     * If you hit ^C, the signal will be proxied to the container.
 
-Remember: you can always detach by killing the Docker client (e.g. close the bash window).
-
 ----
 
 ### Checking container output
 
-Use docker attach if you intend to send input to the container.  
-If you just want to see the output of a container, use docker logs
+* `docker attach` - to send input to the container  
+* `docker logs` - to see the output of a container
 
 ----
 
 ### Restarting a container
 
-When a container has exited, it is in stopped state.
+When a container exits, it goes into a stopped state.
 * It can then be restarted with the start command.
 ```bash
 docker start <yourContainerID>
 ```
-The container will be restarted using the same options you launched it with.
-You can re-attach to it if you want to interact with it
+* The container will be restarted using the same options you launched it with.
 
 ----
 

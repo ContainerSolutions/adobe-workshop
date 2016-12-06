@@ -17,7 +17,7 @@ Run the Docker Hub image nginx, which contains a basic web server:
 docker run -d -P nginx
 ```
 
-Docker will download the image from the Docker Hub.
+Docker will download the image from the Docker Hub if not present locally.
 * `-d` tells Docker to run the image in the background.
 * `-P` tells Docker to make this service reachable from other computers.  
 (-P is the short version of --publish-all.)
@@ -58,15 +58,15 @@ This will connect to the container on port 32772
 ----
 
 ### Manual allocation of ports
-If you want to set port numbers yourself, no problem:
+If you want to set port numbers yourself:
 ```bash
 docker run -d -p 80:80 nginx
-docker run -d -p 8000:80 nginx
+docker run -d -p 8001:80 nginx
 ```
 
 * We are running two NGINX web servers.
 * The first one is exposed on port 80.
-* The second one is exposed on port 8000.
+* The second one is exposed on port 8001.
 
 Note: the convention is port-on-host:port-on-container
 
@@ -106,21 +106,11 @@ A container could use one of the following drivers:
 ----
 
 ### Bridge mode (default)
-* By default, the container gets a virtual eth0 interface.  
-* That interface is provided by a veth pair.
-* It is connected to the Docker bridge.  
+* By default, the container gets a virtual eth0 interface and is connected to the Docker bridge.  
 (Named docker0 by default; configurable with --bridge.)
 * Addresses are allocated on a private, internal subnet.  
 (Docker uses 172.17.0.0/16 by default; configurable with --bip.)
-* Outbound traffic goes through an iptables MASQUERADE rule.
-* Inbound traffic goes through an iptables DNAT rule.
 * The container can have its own routes, iptables rules, etc.
-
-----
-
-### Bridge network
-
-![Bridge](networking_bridge.png)
 
 ----
 
@@ -282,38 +272,6 @@ round-trip min/avg/max = 0.104/0.104/0.104 ms
 
 ----
 
-### Implementation details
-With the "bridge" network driver, each container joining a network receives a new virtual interface.
-```bash
-docker run --net container:con3 alpine ip a
-1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-    inet 127.0.0.1/8 scope host lo
-       valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
-       valid_lft forever preferred_lft forever
-2: sit0@NONE: <NOARP> mtu 1480 qdisc noop state DOWN qlen 1
-    link/sit 0.0.0.0 brd 0.0.0.0
-3: ip6tnl0@NONE: <NOARP> mtu 1452 qdisc noop state DOWN qlen 1
-    link/tunnel6 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00 brd 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
-4: ip6gre0@NONE: <NOARP> mtu 1448 qdisc noop state DOWN qlen 1
-    link/[823] 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00 brd 00:00:00:00:00:00:00:00:00:00:00:00:00:00:00:00
-349: eth0@if350: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
-    link/ether 02:42:ac:13:00:02 brd ff:ff:ff:ff:ff:ff
-    inet 172.19.0.2/16 scope global eth0
-       valid_lft forever preferred_lft forever
-    inet6 fe80::42:acff:fe13:2/64 scope link 
-       valid_lft forever preferred_lft forever
-351: eth1@if352: <BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN> mtu 1500 qdisc noqueue state UP 
-    link/ether 02:42:ac:12:00:04 brd ff:ff:ff:ff:ff:ff
-    inet 172.18.0.4/16 scope global eth1
-       valid_lft forever preferred_lft forever
-    inet6 fe80::42:acff:fe12:4/64 scope link 
-       valid_lft forever preferred_lft forever
-```
-
-----
-
 ### Multi-host networking
 
 One approach:
@@ -327,7 +285,7 @@ The overlay network is based on VXLAN and store neighbor info in a key/value sto
 
 ----
 
-### Do it yourself
+### Do it yourself (homework)
 * Create a network
 * Create a nginx container in this network
 * Create a ubuntu container in this network
@@ -353,3 +311,8 @@ We've learned how to:
 * Manipulate container networking basics.
 * Find a container's IP address.
 * Create private networks for groups of containers.
+
+----
+
+  * [Next up, Connecting our service to a database...](./02_our-service.md)
+

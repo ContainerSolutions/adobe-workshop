@@ -5,7 +5,7 @@
 Fetch the Repo (locally)
 
 ```
-$ git clone https://github.com/ContainerSol/yow-workshop
+$ git clone https://github.com/ContainerSolutions/yow-workshop.git
 ```
 
 ----
@@ -51,7 +51,7 @@ or
 
 ```bash
 $ kill %1
-````
+```
 
 ----
 
@@ -71,4 +71,4 @@ java -jar /home/swagger-codegen-cli.jar generate \
 ## Review
 
 * Questions?
-* [On to containers...](../containers/01_docker-basics.md)
+* On to containers...
