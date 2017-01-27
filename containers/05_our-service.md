@@ -14,9 +14,9 @@
 ```
 FROM golang:1.6
 
-COPY . /go/src/github.com/yow-workshop/deals
+COPY . /go/src/github.com/adobe-workshop/deals
 
-RUN go install github.com/yow-workshop/deals
+RUN go install github.com/adobe-workshop/deals
 
 ENTRYPOINT /go/bin/deals
 
@@ -29,8 +29,8 @@ EXPOSE 8080
 
 ```bash
 cd microserivces/v1/
-docker build -t yow-workshop/deals:v1 .
-docker run -d --publish 8080:8080 yow-workshop/deals:v1
+docker build -t adobe-workshop/deals:v1 .
+docker run -d --publish 8080:8080 adobe-workshop/deals:v1
 ```
 
 ----
@@ -62,10 +62,10 @@ docker rm $(docker ps -ql
 
 ```bash
 cd v2/
-docker build -t yow-workshop/deals:v2 .
+docker build -t adobe-workshop/deals:v2 .
 docker network create my_network
 docker run --name deals-db -d --network my_network mongo
-docker run -d -p 8080:8080 --network my_network yow-workshop/deals:v2
+docker run -d -p 8080:8080 --network my_network adobe-workshop/deals:v2
 ```
 
 ----

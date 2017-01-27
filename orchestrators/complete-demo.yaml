@@ -217,7 +217,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: weaveworksdemos/front-end:yow
+        image: weaveworksdemos/front-end:adobe
         resources:
           requests:
             cpu: 100m

@@ -121,7 +121,7 @@ $ docker images
 REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
 swaggerapi/swagger-generator   latest              c52ff1076727        2 hours ago         688 MB
 weaveworksdemos/load-test      latest              23fe0b6d473b        7 days ago          561 MB
-weaveworksdemos/front-end      yow                 277ae5fdebfb        10 days ago         98.84 MB
+weaveworksdemos/front-end      adobe               277ae5fdebfb        10 days ago         98.84 MB
 ubuntu                         latest              e4415b714b62        12 days ago         128.1 MB
 weaveworksdemos/shipping       latest              89340473bb7e        2 weeks ago         184.8 MB
 weaveworksdemos/payment        latest              0ed544706c07        2 weeks ago         26.31 MB

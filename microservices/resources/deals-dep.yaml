@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: deals
-        image: yow-workshop/deal:v3
+        image: adobe-workshop/deal:v3
         imagePullPolicy: Never
         ports:
         - containerPort: 8080

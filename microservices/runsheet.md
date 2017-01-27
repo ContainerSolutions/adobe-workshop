@@ -5,7 +5,7 @@
 Fetch the Repo (locally)
 
 ```
-$ git clone https://github.com/ContainerSolutions/yow-workshop.git
+$ git clone https://github.com/ContainerSolutions/adobe-workshop.git
 ```
 
 ----
