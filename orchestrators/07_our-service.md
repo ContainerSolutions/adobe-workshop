@@ -11,13 +11,12 @@
 
 ## A real microservice (v3)
 
-`open v3/`
+`open ../microservices/v3/`
 
 ----
 
 ## Build new image
 
-`cd v3/`
 `docker build -t adobe-ws/deals:v3 .`
 
 ----
