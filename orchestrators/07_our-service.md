@@ -11,7 +11,7 @@
 
 ## A real microservice (v3)
 
-`open ../microservices/v3/`
+`cd ../microservices/v3/`
 
 ----
 
@@ -120,7 +120,7 @@ spec:
 
 ## Deploy
 
-may need `sudo` or `--validate=false`
+run with `sudo` or `--validate=false`
 
 ```bash
 kubectl create -f deals-dep.yaml
@@ -144,13 +144,12 @@ Find port
 
 ## Logging and Monitoring
 
-`open v4/`
+`cd ../microservices/v4/`
 
 ----
 
 ## Build new version
 
-`cd v4/`
 `docker build -t adobe-ws/deals:v4 .`
 
 ----
