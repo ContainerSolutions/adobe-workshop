@@ -116,8 +116,9 @@ The image name is:
 
 ### List images on your host
 
+Run `docker images`
+
 ```bash
-$ docker images
 REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
 swaggerapi/swagger-generator   latest              c52ff1076727        2 hours ago         688 MB
 weaveworksdemos/load-test      latest              23fe0b6d473b        7 days ago          561 MB

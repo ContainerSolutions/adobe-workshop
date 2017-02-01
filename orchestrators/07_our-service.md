@@ -18,7 +18,7 @@
 ## Build new image
 
 `cd v3/`
-`docker build -t z2h-zurich/deals:v3 .`
+`docker build -t adobe-ws/deals:v3 .`
 
 ----
 
@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: deals
-        image: z2h-zurich/deals:v3
+        image: adobe-ws/deals:v3
         imagePullPolicy: Never
         ports:
         - containerPort: 8080
@@ -152,7 +152,7 @@ Find port
 ## Build new version
 
 `cd v4/`
-`docker build -t z2h-zurich/deals:v4 .`
+`docker build -t adobe-ws/deals:v4 .`
 
 ----
 
@@ -179,7 +179,7 @@ spec:
     spec:
       containers:
       - name: deals
-        image: z2h-zurich/deals:v3
+        image: adobe-ws/deals:v3
         ports:
         - containerPort: 8080
 ```
@@ -195,7 +195,7 @@ Apply changes and watch pods...
 
 ## Update to latest image
 
-`kubectl set image deployment/deals deals=z2h-zurich/deals:v4`
+`kubectl set image deployment/deals deals=adobe-ws/deals:v4`
 `kubectl rollout status deployment/deals`
 `kubectl get pods`
 
